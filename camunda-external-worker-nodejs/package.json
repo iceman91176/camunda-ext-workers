@@ -1,9 +1,14 @@
 {
   "name": "orderworker",
   "version": "1.0.0",
+  "description": "External Testworker",
   "main": "worker.js",
+  "scripts": {
+    "start": "NODE_EXTRA_CA_CERTS=./config/trustedca.pem NODE_ENV=production node worker.js"
+  },
   "license": "MIT",
   "dependencies": {
-    "camunda-external-task-client-js": "1.0.0"
+    "camunda-external-task-client-js": "1.0.0",
+    "keycloak-connect": "4.5.0"
   }
 }
