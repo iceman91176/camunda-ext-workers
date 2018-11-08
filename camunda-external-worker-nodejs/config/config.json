@@ -1,0 +1,4 @@
+{
+    "camundaEngine":"http://apis.witcom-dev.services/camunda",
+    "workerId":"my-worker-id"
+}

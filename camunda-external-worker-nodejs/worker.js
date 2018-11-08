@@ -6,14 +6,15 @@ const {
 } = require("camunda-external-task-client-js");
 
 const KeycloakJWTInterceptor = require("./lib/KeycloakJWTInterceptor")
-
 const kcConfig = require('./config/keycloak.json');
+const workerConfig = require('./config/config.json');
+
 
 const interceptor = new KeycloakJWTInterceptor(kcConfig);
 // configuration for the Client:
 //  - 'baseUrl': url to the Workflow Engine
 //  - 'logger': utility to automatically log important events
-const config = { baseUrl: "http://apis.witcom-dev.services/camunda", use: logger,workerId:'order-worker-01',interceptors: interceptor};
+const config = { baseUrl: workerConfig.camundaEngine, use: logger,workerId:workerConfig.workerId,interceptors: interceptor};
 
 // create a Client instance with custom configuration
 const client = new Client(config);
