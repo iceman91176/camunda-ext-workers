@@ -42,6 +42,17 @@ class KeycloakJWTInterceptor {
         }
       this.keycloak.grantManager.ensureFreshness(this.grant).then((refreshdetails) => {
         this.grant=refreshdetails;
+      })
+      .catch((error) => {
+          console.log("Unable to refresh token, trying to get a new one ");
+          
+          this.keycloak.grantManager.obtainFromClientCredentials()
+          .then((newGrant) => {
+                this.grant = newGrant;
+          })
+          .catch((error) => {
+                throw new Error("Error getting access token",error);
+          });
       });
     const token = this.grant.access_token.token;
     return { Authorization: `Bearer ${token}` };
